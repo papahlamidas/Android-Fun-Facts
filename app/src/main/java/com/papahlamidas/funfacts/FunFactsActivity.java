@@ -1,9 +1,15 @@
 package com.papahlamidas.funfacts;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Random;
 
 
 public class FunFactsActivity extends Activity {
@@ -12,6 +18,26 @@ public class FunFactsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fun_facts);
+
+        // Declare our view variables and assign them the view from the layout file
+        final TextView factLabel = (TextView) findViewById(R.id.factTextView);
+        Button showFactButton = (Button) findViewById(R.id.showFactButton);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // The button was clicked, so update the fact label with a new fact
+                String fact = "";
+                // Randomly select a fact
+                Random randomGenerator = new Random(); // Construct a new Random number generator
+                int randomNumber = randomGenerator.nextInt(3);
+                fact = randomNumber + "";
+
+                // Updated the label with our dynamic fact
+                factLabel.setText(fact);
+            }
+        };
+        showFactButton.setOnClickListener(listener);
     }
 
 
